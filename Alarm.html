@@ -46,7 +46,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-             height: 500px;
+            height: 500px;
         }
     </style>
 </head>
@@ -68,6 +68,7 @@
     // const ring=document.createElement("audio");
     // ring.className="tone";
   const p=document.getElementsByClassName("print")[0];
+  var sound;
   setInterval(myTimer, 1000);
   var str;
   var ele=[];
@@ -80,7 +81,7 @@ function myTimer() {
   p.innerHTML=str;
  for (const key in array) {
     if(str==array[key]){
-    alert("alarm");
+    sound.play();
     ele[key].remove();
   }
  }
@@ -103,9 +104,11 @@ function myTimer() {
 function set(){
     val=prompt("Enter the time in HH:MM:SS AM/PM format");
     const a=document.createElement("div");
+    sound=new Audio("sound.mp3")
     a.className="alarm";
-    a.append(val);
-    array.push(val);
+    if(val!=null){
+        a.append(val);
+        array.push(val);
     ele.push(a);
     const dlt =document.createElement("button");
     dlt.innerHTML="Delete Alarm ";
@@ -116,6 +119,11 @@ function set(){
     a.appendChild(dlt);
     const par=document.getElementsByClassName("parent")[0];
     par.append(a);
+    }
+    else{
+        alert("Enter a time");
+    }
+   
     //timeId=Date.now();
     // savetolocal(timeId,val);
 
